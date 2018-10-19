@@ -1,0 +1,8 @@
+platform :ios, '11.3'
+use_frameworks!
+
+target 'Neighborhood' do
+    project '../Neighborhood.xcodeproj'
+    pod "Macaw", "0.9.3"
+    workspace 'Neighborhood'
+end
