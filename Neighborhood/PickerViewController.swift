@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Macaw
 
 enum IncomeBracket: Int {
     // do we want an 0 for no-selection?

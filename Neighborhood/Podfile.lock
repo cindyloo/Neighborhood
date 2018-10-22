@@ -1,20 +1,16 @@
 PODS:
-  - Macaw (0.9.3):
-    - SWXMLHash
-  - SWXMLHash (4.7.4)
+  - PocketSVG (2.4.1)
 
 DEPENDENCIES:
-  - Macaw (= 0.9.3)
+  - PocketSVG (~> 2.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Macaw
-    - SWXMLHash
+    - PocketSVG
 
 SPEC CHECKSUMS:
-  Macaw: e370d81f465ea1daa8a72d2afa218000bcd24f0a
-  SWXMLHash: b35739a5cfd915c3b482977aa720d6708e260a90
+  PocketSVG: 94d9740c885167f680b0175e00dd7c4153e129ab
 
-PODFILE CHECKSUM: e6e51eb814bb9bce04b027801a0c3660aa46ea57
+PODFILE CHECKSUM: 0302513b1e6cbaddc2bc361994f95f304ec3fafd
 
 COCOAPODS: 1.5.3

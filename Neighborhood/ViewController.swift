@@ -9,6 +9,7 @@
 import UIKit
 import SceneKit
 import ARKit
+import PocketSVG
 
 
 class ViewController: UIViewController, ARSCNViewDelegate {
@@ -53,7 +54,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
 
-    // MARK: - ARSCNViewDelegate
+    func svgParse(resourcePath: String) -> SVGImageView{
+        
+        let url = Bundle.main.url(forResource: "cambridge_census_tracts", withExtension: "svg")!
+        let svgImageView = SVGImageView(contentsOf: url)
+        svgImageView.frame = self.view.bounds
+        
+        return svgImageView
+    }
+
     
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -61,7 +70,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             return
         }
         let imageAnchor = anchor as? ARImageAnchor
-        
+        let svgView = svgParse(resourcePath: "tiger.svg")
         let referenceImage = imageAnchor?.referenceImage
         DispatchQueue.main.async {
 
@@ -70,15 +79,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             tempCollageView.image = UIImage(data: UIImage(named: "mapwork.png")?.pngData() ?? Data())
 
             let imageMaterial = SCNMaterial()
-            imageMaterial.diffuse.contents = UIImage(named: "mapwork.png")
+            //imageMaterial.diffuse.contents = UIImage(named: "mapwork.png")
             imageMaterial.isDoubleSided = true
             imageMaterial.diffuse.contents = tempCollageView.layer
+            
+            /*let translation = SCNMatrix4MakeTranslation(0, 0, 0)
+            let rotation = SCNMatrix4MakeRotation(Float.pi / 2, 0, 0, 1)
+            let transform = SCNMatrix4Mult(translation, rotation)
+            imageMaterial.diffuse.contentsTransform = transform */
             // Create a plane to visualize the initial position of the detected image.
             let planeCollage = SCNPlane(width: referenceImage!.physicalSize.width,
                                  height: referenceImage!.physicalSize.height)
             planeCollage.materials = [imageMaterial]
-            
-            
             
 
             let planeCollageNode = SCNNode(geometry: planeCollage)
@@ -87,13 +99,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
             
             let plane = SCNPlane(width: referenceImage!.physicalSize.width,
-                                        height: referenceImage!.physicalSize.height)
-            let shape = CAShapeLayer()
+                                           height: referenceImage!.physicalSize.height)
+            
+            // maybe use this to create a shape like the svg shape and color it green
+            /*let shape = CAShapeLayer()
             shape.opacity = 0.5
             shape.lineWidth = 2
             shape.lineJoin = CAShapeLayerLineJoin.miter
-            shape.strokeColor = UIColor(red: 0, green: 255, blue: 0, alpha: 1).cgColor
-            shape.fillColor = UIColor(red: 0, green: 255, blue: 0, alpha: 1).cgColor
+            shape.strokeColor = UIColor(red: 0, green: 255, blue: 0, alpha: 255).cgColor
+            shape.fillColor = UIColor(red: 0, green: 255, blue: 0, alpha: 255).cgColor
             
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 100, y: 300))
@@ -102,21 +116,34 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             path.addLine(to: CGPoint(x: 200, y: -1000))
             path.addLine(to: CGPoint(x: 100, y: -1000))
             path.close()
-            shape.path = path.cgPath
+            shape.path = path.cgPath*/
             
-            let tempView = UIView.init(frame: CGRect(x: 0, y: 0, width: 900, height: 900))
-            tempView.layer.bounds = CGRect(x: -450, y: -450, width: tempView.frame.size.width, height: tempView.frame.size.height)
-            tempView.layer.addSublayer(shape)
-            tempView.backgroundColor = UIColor(red: 0, green: 255, blue: 0, alpha: 0.0)
+            //svgView.layer.transform = CATransform3DTranslate(rotation, 20, 30, 0)
+            
+            //let tempView = UIView.init(frame: CGRect(x: 0, y: 0, width: 900, height: 900))
+            //tempView.layer.bounds = CGRect(x: -450, y: -450, width: tempView.frame.size.width, height: tempView.frame.size.height)
+            //tempView.layer.addSublayer(shape)
+            //tempView.backgroundColor = UIColor.clear
             let newMaterial = SCNMaterial()
+            newMaterial.blendMode = SCNBlendMode.add // if multiply it turns everything green
+            //newMaterial.multiply.contents = tempView.layer //- nice affect with poloygon
+            //newMaterial.emission.contents = svgView.layer // nice affect to color everything green
+            newMaterial.diffuse.contents = svgView.layer
             newMaterial.isDoubleSided = true
-            newMaterial.diffuse.contents = tempView.layer
+            newMaterial.transparency = 1
             plane.materials = [newMaterial]
             
+
             
             let planeNode = SCNNode(geometry: plane)
-            planeNode.opacity = 0.5
-            planeNode.eulerAngles.x = -.pi / 2
+            planeNode.opacity = 1
+            
+            planeNode.eulerAngles.z = -360 * .pi / 180
+            planeNode.eulerAngles.x = .pi / 2
+            planeNode.position.x = -0.03
+            planeNode.position.y = -0.01
+            planeNode.position.z = -0.02 //offset
+            
             /*
              `SCNPlane` is vertically oriented in its local coordinate space, but
              `ARImageAnchor` assumes the image is horizontal in its local space, so
@@ -131,8 +158,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             //planeNode.runAction(self.imageHighlightAction)
             
             // Add the plane visualization to the scene.
+            
             node.addChildNode(planeCollageNode)
-            //node.addChildNode(planeNode)
+            node.addChildNode(planeNode)
         }
     }
     

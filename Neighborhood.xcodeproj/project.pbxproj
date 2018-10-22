@@ -19,6 +19,8 @@
 		5D2E458C217785D70026C997 /* NeighborhoodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2E458B217785D70026C997 /* NeighborhoodUITests.swift */; };
 		5D2E459C217789D60026C997 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2E459B217789D60026C997 /* PickerViewController.swift */; };
 		5D5002F8217A385700FCAAEA /* mapwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5002F7217A385700FCAAEA /* mapwork.png */; };
+		5D5002FC217A56B800FCAAEA /* cambridge_census_tracts.svg in Resources */ = {isa = PBXBuildFile; fileRef = 5D5002FB217A56B700FCAAEA /* cambridge_census_tracts.svg */; };
+		5D5002FE217A588D00FCAAEA /* tiger.svg in Resources */ = {isa = PBXBuildFile; fileRef = 5D5002FD217A588D00FCAAEA /* tiger.svg */; };
 		5D690C4E2179242700866376 /* cambridge_census_tracts_id_color.svg in Resources */ = {isa = PBXBuildFile; fileRef = 5D690C4D2179242700866376 /* cambridge_census_tracts_id_color.svg */; };
 		5D70C664217796240016D4B6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D70C663217796240016D4B6 /* Media.xcassets */; };
 /* End PBXBuildFile section */
@@ -59,6 +61,8 @@
 		5D2E458D217785D70026C997 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D2E459B217789D60026C997 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		5D5002F7217A385700FCAAEA /* mapwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapwork.png; sourceTree = "<group>"; };
+		5D5002FB217A56B700FCAAEA /* cambridge_census_tracts.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = cambridge_census_tracts.svg; sourceTree = "<group>"; };
+		5D5002FD217A588D00FCAAEA /* tiger.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = tiger.svg; sourceTree = "<group>"; };
 		5D690C4D2179242700866376 /* cambridge_census_tracts_id_color.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = cambridge_census_tracts_id_color.svg; sourceTree = "<group>"; };
 		5D70C663217796240016D4B6 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		7FA9EC70E313799CCD1AC865 /* Pods-Neighborhood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neighborhood.release.xcconfig"; path = "Neighborhood/Pods/Target Support Files/Pods-Neighborhood/Pods-Neighborhood.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 		5D2E4568217785D60026C997 /* Neighborhood */ = {
 			isa = PBXGroup;
 			children = (
+				5D5002FD217A588D00FCAAEA /* tiger.svg */,
+				5D5002FB217A56B700FCAAEA /* cambridge_census_tracts.svg */,
 				5D690C4D2179242700866376 /* cambridge_census_tracts_id_color.svg */,
 				5D2E4569217785D60026C997 /* AppDelegate.swift */,
 				5D2E456B217785D60026C997 /* art.scnassets */,
@@ -275,7 +281,9 @@
 			files = (
 				5D118BC4217919DF007589B2 /* Macaw.podspec in Resources */,
 				5D70C664217796240016D4B6 /* Media.xcassets in Resources */,
+				5D5002FE217A588D00FCAAEA /* tiger.svg in Resources */,
 				5D2E456C217785D60026C997 /* art.scnassets in Resources */,
+				5D5002FC217A56B800FCAAEA /* cambridge_census_tracts.svg in Resources */,
 				5D2E4576217785D60026C997 /* LaunchScreen.storyboard in Resources */,
 				5D690C4E2179242700866376 /* cambridge_census_tracts_id_color.svg in Resources */,
 				5D2E4573217785D60026C997 /* Assets.xcassets in Resources */,
@@ -310,15 +318,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Neighborhood/Pods/Target Support Files/Pods-Neighborhood/Pods-Neighborhood-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Macaw/Macaw.framework",
-				"${BUILT_PRODUCTS_DIR}/SWXMLHash/SWXMLHash.framework",
+				"${BUILT_PRODUCTS_DIR}/PocketSVG/PocketSVG.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Macaw.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWXMLHash.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PocketSVG.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
